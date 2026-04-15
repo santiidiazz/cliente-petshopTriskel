@@ -19,27 +19,50 @@ export default function ProductCard({ product, onAdd }: ProductCardProps) {
   };
 
   return (
-    <div className="bg-white rounded-4xl p-5 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 border border-forest-50 flex flex-col gap-4">
-      {/* Emoji / Image area */}
-      <div className="bg-gradient-to-br from-forest-50 to-paw rounded-3xl aspect-square flex items-center justify-center text-5xl">
-        {product.emoji}
+    <div className="bg-white rounded-4xl p-5 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 border border-forest-50 flex flex-col gap-4 h-full">
+      
+      {/* Área de Imagen / Emoji */}
+      <div className="bg-gradient-to-br from-forest-50 to-paw rounded-3xl aspect-square flex items-center justify-center overflow-hidden flex-shrink-0">
+        {product.image ? (
+          <img
+            src={`/${product.image}`} // Esto busca en la raíz de la carpeta public
+            alt={product.name}
+            className="w-full h-full object-cover rounded-3xl"
+            onError={(e) => {
+              // Si la imagen no carga (ej: el nombre está mal escrito), muestra el emoji
+              e.currentTarget.style.display = 'none';
+              const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+              if (fallback) fallback.style.display = 'block';
+            }}
+          />
+        ) : null}
+        <span
+          className="text-5xl"
+          style={product.image ? { display: 'none' } : {}}
+        >
+          {product.emoji}
+        </span>
       </div>
 
-      {/* Info */}
+      {/* Información del Producto */}
       <div className="flex flex-col gap-1 flex-1">
-        {/* Pet type badge */}
-        <span className="inline-flex items-center bg-forest-100 text-forest-600 text-xs font-display font-700 px-2.5 py-1 rounded-full w-fit">
+        {/* Badge del tipo de mascota (Perros, Gatos, etc.) */}
+        <span className="inline-flex items-center bg-forest-100 text-forest-600 text-[10px] font-display font-700 px-2.5 py-1 rounded-full w-fit uppercase tracking-wider">
           {product.petType}
         </span>
+
+        {/* Nombre del Producto */}
         <h3 className="font-display font-800 text-base text-forest-800 leading-tight mt-1">
           {product.name}
         </h3>
-        <p className="font-body text-xs text-forest-400 leading-relaxed">
+
+        {/* Descripción (Aparecerá "Comida cachorro", etc.) */}
+        <p className="font-body text-xs text-forest-400 leading-relaxed line-clamp-2">
           {product.description}
         </p>
       </div>
 
-      {/* Price */}
+      {/* Precio y Unidad */}
       <div className="flex items-baseline gap-1">
         <span className="font-body text-xs text-forest-400">$</span>
         <span className="font-display font-900 text-2xl text-forest-700">
@@ -48,9 +71,8 @@ export default function ProductCard({ product, onAdd }: ProductCardProps) {
         <span className="font-body text-xs text-forest-400">/ {product.unit}</span>
       </div>
 
-      {/* Quantity + Add */}
+      {/* Selector de Cantidad y Botón */}
       <div className="flex items-center gap-2">
-        {/* Quantity control */}
         <div className="flex items-center gap-1 bg-forest-50 rounded-2xl p-1">
           <button
             onClick={() => setQty(Math.max(1, qty - 1))}
@@ -69,7 +91,6 @@ export default function ProductCard({ product, onAdd }: ProductCardProps) {
           </button>
         </div>
 
-        {/* Add button */}
         <button
           onClick={handleAdd}
           className={`flex-1 py-2 rounded-2xl font-display font-800 text-sm transition-all duration-200 ${

@@ -7,6 +7,7 @@ export interface Product {
   petType: string;
   price: number;
   emoji: string;
+  image: string;
   description: string;
   unit: string;
 }

@@ -1,34 +1,39 @@
 ---
+import SEO from '../components/SEO.astro';
+
 interface Props {
-	title: string; 
+  title?: string;
+  description?: string;
+  image?: string;
 }
 
-const { title } = Astro.props; 
+const {
+  title = 'Petshop Triskel – Tu mascota merece lo mejor',
+  description = 'Alimentos, accesorios y shampoos para perros, gatos, peces, conejos y aves en Montevideo. Pedí por WhatsApp y lo llevamos hasta tu puerta.',
+  image = 'https://triskel.com/og-image.png',
+} = Astro.props;
 ---
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Petshop Triskel - Alimentos y accesorios para tus mascotas. Envío a domicilio en Montevideo." />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
- 
-    <!-- Google Fonts: Nunito + DM Sans -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{title}</title>
+
+    <!-- SEO + Open Graph -->
+    <SEO title={title} description={description} image={image} />
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700;800;900&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
- 
-    <title>{title}</title>
- 
+
     <style is:global>
-      * {
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
       body {
         font-family: 'DM Sans', sans-serif;
         background-color: #faf8f4;
@@ -36,19 +41,10 @@ const { title } = Astro.props;
         margin: 0;
         padding: 0;
       }
-      h1, h2, h3, h4, h5, h6 {
-        font-family: 'Nunito', sans-serif;
-      }
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #e0f3e0;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #5bb55c;
-        border-radius: 3px;
-      }
+      h1, h2, h3, h4, h5, h6 { font-family: 'Nunito', sans-serif; }
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #e0f3e0; }
+      ::-webkit-scrollbar-thumb { background: #5bb55c; border-radius: 3px; }
     </style>
   </head>
   <body>

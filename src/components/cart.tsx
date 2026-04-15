@@ -179,7 +179,7 @@ export default function Cart({ items, isOpen, onClose, onUpdateQty, onRemove }: 
             {/* Address */}
             <div>
               <label className="font-display font-700 text-sm text-forest-700 mb-2 block">
-                📍 Tu dirección
+                 Tu dirección
               </label>
               <input
                 type="text"
