@@ -26,7 +26,7 @@ export const products: Product[] = [
     unit: '15kg',
   },
   {
-    id: 'dog-food-4',
+    id: 'dog-food-5',
     name: 'Alimento Perro Cachorro Raza Medianas Y Grandes',
     category: 'Alimentos',
     petType: 'Perros',

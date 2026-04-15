@@ -25,11 +25,11 @@ export default function ProductCard({ product, onAdd }: ProductCardProps) {
       <div className="bg-gradient-to-br from-forest-50 to-paw rounded-3xl aspect-square flex items-center justify-center overflow-hidden flex-shrink-0">
         {product.image ? (
           <img
-            src={`/${product.image}`} // Esto busca en la raíz de la carpeta public
+            src={`/${product.image}`}
             alt={product.name}
             className="w-full h-full object-cover rounded-3xl"
             onError={(e) => {
-              // Si la imagen no carga (ej: el nombre está mal escrito), muestra el emoji
+              // Si falla la imagen, mostramos el emoji que está en el span siguiente
               e.currentTarget.style.display = 'none';
               const fallback = e.currentTarget.nextElementSibling as HTMLElement;
               if (fallback) fallback.style.display = 'block';
@@ -46,7 +46,7 @@ export default function ProductCard({ product, onAdd }: ProductCardProps) {
 
       {/* Información del Producto */}
       <div className="flex flex-col gap-1 flex-1">
-        {/* Badge del tipo de mascota (Perros, Gatos, etc.) */}
+        {/* Badge del tipo de mascota */}
         <span className="inline-flex items-center bg-forest-100 text-forest-600 text-[10px] font-display font-700 px-2.5 py-1 rounded-full w-fit uppercase tracking-wider">
           {product.petType}
         </span>
@@ -73,6 +73,7 @@ export default function ProductCard({ product, onAdd }: ProductCardProps) {
 
       {/* Selector de Cantidad y Botón */}
       <div className="flex items-center gap-2">
+        {/* Control de cantidad */}
         <div className="flex items-center gap-1 bg-forest-50 rounded-2xl p-1">
           <button
             onClick={() => setQty(Math.max(1, qty - 1))}
@@ -91,6 +92,7 @@ export default function ProductCard({ product, onAdd }: ProductCardProps) {
           </button>
         </div>
 
+        {/* Botón agregar con feedback visual */}
         <button
           onClick={handleAdd}
           className={`flex-1 py-2 rounded-2xl font-display font-800 text-sm transition-all duration-200 ${

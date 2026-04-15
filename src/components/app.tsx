@@ -1,5 +1,5 @@
 // src/components/App.tsx
-// Main React component — manages cart state and assembles all sections
+// Componente principal — maneja el estado del carrito y ensambla las secciones
 
 import { useState } from 'react';
 import Header from './header';
@@ -14,8 +14,7 @@ export default function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
 
-  
-  // Add product (or increase qty if already in cart)
+  // Agregar producto (o aumentar cantidad si ya existe)
   const handleAddToCart = (product: Product, qty: number) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.product.id === product.id);
@@ -28,11 +27,11 @@ export default function App() {
       }
       return [...prev, { product, quantity: qty }];
     });
-    // Auto-open cart on first item
-    setCartOpen(true);
+
+    // Se eliminó setCartOpen(true) para permitir al usuario seguir comprando
   };
 
-  // Update quantity (delta = +1 or -1)
+  // Actualizar cantidad (delta = +1 o -1)
   const handleUpdateQty = (productId: string, delta: number) => {
     setCartItems((prev) =>
       prev
@@ -45,7 +44,7 @@ export default function App() {
     );
   };
 
-  // Remove item entirely
+  // Eliminar item por completo
   const handleRemove = (productId: string) => {
     setCartItems((prev) => prev.filter((item) => item.product.id !== productId));
   };
@@ -75,7 +74,7 @@ export default function App() {
         onRemove={handleRemove}
       />
 
-      {/* Floating WhatsApp button */}
+      {/* Botón flotante de WhatsApp */}
       <a
         href="https://wa.me/59898947405?text=Hola%20Triskel!%20Quiero%20hacer%20un%20pedido%20🐾"
         target="_blank"

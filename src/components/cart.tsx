@@ -91,60 +91,89 @@ export default function Cart({ items, isOpen, onClose, onUpdateQty, onRemove }: 
               </button>
             </div>
           ) : (
-            items.map((item) => (
-              <div
-                key={item.product.id}
-                className="flex items-center gap-3 bg-forest-50 rounded-3xl p-3 border border-forest-100"
+            <>
+              {items.map((item) => (
+                <div
+                  key={item.product.id}
+                  className="flex items-center gap-3 bg-forest-50 rounded-3xl p-3 border border-forest-100"
+                >
+                  {/* Imagen / Emoji */}
+                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden">
+                    {item.product.image ? (
+                      <img 
+                        src={`/${item.product.image}`} 
+                        alt="" 
+                        className="w-full h-full object-cover" 
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'block';
+                        }}
+                      />
+                    ) : null}
+                    <span 
+                      className="text-2xl"
+                      style={item.product.image ? { display: 'none' } : {}}
+                    >
+                      {item.product.emoji}
+                    </span>
+                  </div>
+
+                  {/* Info */}
+                  <div className="flex-1 min-w-0">
+                    <p className="font-display font-700 text-sm text-forest-800 truncate">
+                      {item.product.name}
+                    </p>
+                    <p className="font-body text-xs text-forest-400">
+                      ${item.product.price} c/u
+                    </p>
+                  </div>
+
+                  {/* Qty controls */}
+                  <div className="flex items-center gap-1">
+                    <button
+                      onClick={() => onUpdateQty(item.product.id, -1)}
+                      className="w-7 h-7 rounded-xl bg-white text-forest-600 font-display font-800 hover:bg-forest-100 transition-colors flex items-center justify-center shadow-sm text-base"
+                    >
+                      −
+                    </button>
+                    <span className="w-6 text-center font-display font-800 text-sm text-forest-700">
+                      {item.quantity}
+                    </span>
+                    <button
+                      onClick={() => onUpdateQty(item.product.id, 1)}
+                      className="w-7 h-7 rounded-xl bg-white text-forest-600 font-display font-800 hover:bg-forest-100 transition-colors flex items-center justify-center shadow-sm text-base"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  {/* Subtotal */}
+                  <div className="text-right ml-1">
+                    <p className="font-display font-900 text-sm text-forest-700">
+                      ${item.product.price * item.quantity}
+                    </p>
+                    <button
+                      onClick={() => onRemove(item.product.id)}
+                      className="text-red-400 hover:text-red-600 text-xs font-body transition-colors"
+                    >
+                      quitar
+                    </button>
+                  </div>
+                </div>
+              ))}
+
+              {/* Botón para volver al catálogo */}
+              <button
+                onClick={onClose}
+                className="w-full text-forest-500 font-display font-700 text-sm py-4 mt-2 hover:bg-forest-50 rounded-3xl transition-all border-2 border-dashed border-forest-100 flex items-center justify-center gap-2"
               >
-                {/* Emoji */}
-                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-2xl flex-shrink-0 shadow-sm">
-                  {item.product.emoji}
-                </div>
-                {/* Info */}
-                <div className="flex-1 min-w-0">
-                  <p className="font-display font-700 text-sm text-forest-800 truncate">
-                    {item.product.name}
-                  </p>
-                  <p className="font-body text-xs text-forest-400">
-                    ${item.product.price} c/u
-                  </p>
-                </div>
-                {/* Qty controls */}
-                <div className="flex items-center gap-1">
-                  <button
-                    onClick={() => onUpdateQty(item.product.id, -1)}
-                    className="w-7 h-7 rounded-xl bg-white text-forest-600 font-display font-800 hover:bg-forest-100 transition-colors flex items-center justify-center shadow-sm text-base"
-                  >
-                    −
-                  </button>
-                  <span className="w-6 text-center font-display font-800 text-sm text-forest-700">
-                    {item.quantity}
-                  </span>
-                  <button
-                    onClick={() => onUpdateQty(item.product.id, 1)}
-                    className="w-7 h-7 rounded-xl bg-white text-forest-600 font-display font-800 hover:bg-forest-100 transition-colors flex items-center justify-center shadow-sm text-base"
-                  >
-                    +
-                  </button>
-                </div>
-                {/* Subtotal */}
-                <div className="text-right ml-1">
-                  <p className="font-display font-900 text-sm text-forest-700">
-                    ${item.product.price * item.quantity}
-                  </p>
-                  <button
-                    onClick={() => onRemove(item.product.id)}
-                    className="text-red-400 hover:text-red-600 text-xs font-body transition-colors"
-                  >
-                    quitar
-                  </button>
-                </div>
-              </div>
-            ))
+                ← Seguir agregando productos
+              </button>
+            </>
           )}
         </div>
 
-        {/* Checkout form + total (only if has items) */}
+        {/* Checkout form + total */}
         {items.length > 0 && (
           <div className="px-6 py-5 border-t border-forest-100 flex flex-col gap-4 bg-forest-50/50">
             {/* Payment method */}
