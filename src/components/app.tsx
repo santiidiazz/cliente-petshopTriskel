@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import Header from './header';
 import Hero from './hero';
+import Promotions from './promotions'; // <-- Importamos la nueva sección
 import Catalog from './catalog';
 import Cart from './cart';
 import Shipping from './shipping';
@@ -60,6 +61,8 @@ export default function App() {
 
       <main>
         <Hero />
+        {/* Aquí agregamos las promociones, pasándole la misma función del carrito */}
+        <Promotions onAddToCart={handleAddToCart} />
         <Catalog onAddToCart={handleAddToCart} />
         <Shipping />
       </main>
