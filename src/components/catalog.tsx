@@ -21,7 +21,7 @@ export default function Catalog({ onAddToCart }: CatalogProps) {
   return (
     <section id="catalogo" className="bg-white">
       
-      {/* Imagen portada — full width, justo debajo del hero */}
+      {/* Imagen portada — full width, justo debajo de las promociones */}
       <div className="w-full">
         <img
           src="/imagen_portada.png"
@@ -45,7 +45,7 @@ export default function Catalog({ onAddToCart }: CatalogProps) {
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col gap-4 mb-10">
+        <div className="flex flex-col gap-4 mb-8">
           {/* Pet type filter */}
           <div className="flex flex-wrap gap-2 justify-center">
             {petTypes.map((pet) => (
@@ -85,6 +85,27 @@ export default function Catalog({ onAddToCart }: CatalogProps) {
               </button>
             ))}
           </div>
+        </div>
+
+        {/* BANNER: TRABAJAMOS CON TODAS LAS MARCAS */}
+        <div className="bg-amber-50 border-2 border-amber-100 rounded-3xl p-5 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+          <div className="flex items-center gap-4 text-center sm:text-left">
+            <div className="text-3xl hidden sm:block">💡</div>
+            <div>
+              <p className="font-display font-800 text-amber-800 text-lg">¿No encontrás lo que buscás?</p>
+              <p className="font-body text-amber-700 text-sm">
+                Trabajamos con <strong>todas las marcas</strong>, solo consulte, gracias.
+              </p>
+            </div>
+          </div>
+          <a
+            href="https://wa.me/59898947405?text=Hola%20Triskel!%20Estoy%20buscando%20un%20producto%20de%20una%20marca%20específica..."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="whitespace-nowrap px-6 py-3 bg-white border-2 border-amber-200 hover:bg-amber-100 text-amber-800 font-display font-800 text-sm rounded-2xl transition-all shadow-sm"
+          >
+            Consultar stock 💬
+          </a>
         </div>
 
         {/* Product grid */}
