@@ -25,7 +25,7 @@ export default function ProductCard({ product, onAdd }: ProductCardProps) {
       <div className="bg-gradient-to-br from-forest-50 to-paw rounded-3xl aspect-square flex items-center justify-center overflow-hidden flex-shrink-0">
         {product.image ? (
           <img
-            src={`/${product.image}`}
+            src={product.image}
             alt={product.name}
             className="w-full h-full object-cover rounded-3xl"
             onError={(e) => {
